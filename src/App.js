@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Contact from './components/Contact';
+import Header from './components/Header';
 import './App.css';
 
 // main app component that gets rendered
@@ -10,7 +11,8 @@ class App extends Component {
     return (
       <div className="App">
         <h1>The app component</h1>
-        <Contact></Contact>
+        <Header branding="Contact Manager" />
+        <Contact />
       </div>
     );
   }

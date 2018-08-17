@@ -10,7 +10,7 @@ class Contact extends Component {
             <li>Phone: 555-555-5555</li>
         </ul>
       </div>
-    )
+    );
   }
 }
 
