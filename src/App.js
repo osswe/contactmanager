@@ -8,11 +8,13 @@ import './App.css';
 
 class App extends Component {
   render() {
+    
     return (
       <div className="App">
         <h1>The app component</h1>
-        <Header branding="Contact Manager" />
-        <Contact />
+        <Header branding="Contract Winner" />
+        <Contact name="John Doe" email = "jdoe@gmail.com" phone="555-666-7777" />
+        <Contact name="Karen Smith" email = "karen@gmail.com" phone="777-666-5555" />
       </div>
     );
   }
