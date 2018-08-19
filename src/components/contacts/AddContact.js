@@ -8,6 +8,7 @@ class AddContact extends Component {
     name: '',
     email: '',
     phone: '',
+    errors: {}
   }
 
   onChange = e => {
@@ -17,6 +18,21 @@ class AddContact extends Component {
   onSubmit = (dispatch, e) => {
     e.preventDefault(); // prevent default submission behavior
     const { name, email, phone } = this.state;
+
+    // check for errors
+    if (name === '') {
+      this.setState({ errors: { name: 'Name is required' } });
+      return;
+    }
+    if (email === '') {
+      this.setState({ errors: { email: 'Email is required' } });
+      return;
+    }
+    if (phone === '') {
+      this.setState({ errors: { phone: 'Phone is required' } });
+      return;
+    }
+
     const newContact = { id: uuid(), name, email, phone };
     dispatch({
       type: 'ADD_CONTACT',
@@ -24,11 +40,11 @@ class AddContact extends Component {
     });
 
     // clear state
-    this.setState({ name: '', email: '', phone: '' });
+    this.setState({ name: '', email: '', phone: '', errors: {} });
   }
 
   render() {
-    const { name, email, phone } = this.state;
+    const { name, email, phone, errors } = this.state;
     return (
       <Consumer>
         { value => {
@@ -38,9 +54,9 @@ class AddContact extends Component {
               <div className="card-header">Add Contact</div>
               <div className="card-body">
                 <form onSubmit={ this.onSubmit.bind(this, dispatch) }>
-                  <TextInputGroup label="Name" name="name" type="text" placeholder="Enter name..." value={ name } onChange={ this.onChange } />
-                  <TextInputGroup label="Email" name="email" type="email" placeholder="Enter email..." value={ email } onChange={ this.onChange } />
-                  <TextInputGroup label="Phone" name="phone" type="text" placeholder="Enter phone..." value={ phone } onChange={ this.onChange } />
+                  <TextInputGroup error={ errors.name } label="Name" name="name" type="text" placeholder="Enter name..." value={ name } onChange={ this.onChange } />
+                  <TextInputGroup error={ errors.email } label="Email" name="email" type="email" placeholder="Enter email..." value={ email } onChange={ this.onChange } />
+                  <TextInputGroup error={ errors.phone } label="Phone" name="phone" type="text" placeholder="Enter phone..." value={ phone } onChange={ this.onChange } />
                   <input type="submit" value="Add Contact" className="btn btn-block" />
                 </form>
               </div>
