@@ -41,6 +41,9 @@ class AddContact extends Component {
 
     // clear state
     this.setState({ name: '', email: '', phone: '', errors: {} });
+
+    // redirect to homepage
+    this.props.history.push('/');
   }
 
   render() {
